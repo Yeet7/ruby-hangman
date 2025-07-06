@@ -1,3 +1,5 @@
+require "yaml"
+
 # Open/Read/Write Files
 class Files
   def self.get_word(file)
@@ -27,5 +29,19 @@ class Files
 
   def self.generate_line
     rand(9894)
+  end
+
+  # Define two methods, one to write and one to read both the word and u_word
+
+  def self.write_save(word, u_word, round)
+    File.write(File.expand_path("~/Odin/Ruby/ruby-hangman/lib/save.yaml"), YAML.dump({
+                                                                                       word: word,
+                                                                                       u_word: u_word,
+                                                                                       round: round
+                                                                                     }))
+  end
+
+  def self.read_save
+    YAML.load_file(File.expand_path("~/Odin/Ruby/ruby-hangman/lib/save.yaml"))
   end
 end
